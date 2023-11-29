@@ -3,6 +3,5 @@ CREATE TABLE IF NOT EXISTS actor(
     name varchar(50),
     born varchar(120),
     image_link varchar(350),
-    general_info text ARRAY,
-    filmography JSON
+    general_info text ARRAY
 );

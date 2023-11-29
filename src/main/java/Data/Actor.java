@@ -12,6 +12,7 @@ public class Actor {
     private String filmography;
 
 
+
     public Actor(String name, String born, String image_link, ArrayList<String> general_info, String filmography) {
         this.name = name;
         this.born = born;

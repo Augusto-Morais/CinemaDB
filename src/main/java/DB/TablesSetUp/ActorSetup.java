@@ -18,10 +18,12 @@ public class ActorSetup {
     private static final String dir = System.getProperty("user.dir");
 
     private static int count = 0;
+
+
     private static final String sqlFilesDir = dir + "\\src\\main\\java\\DB\\SQLFiles\\Actor\\";
 
 
-    static ArrayList<Actor> scrapeActors(){
+    public static ArrayList<Actor> scrapeActors(){
         ArrayList<Actor> actors = new ArrayList<>();
 
         try{
@@ -61,37 +63,37 @@ public class ActorSetup {
                         .get();
 
 //                        NAME
-                String name = actorDoc.select("h1 span").text().replaceAll("'","\"").replaceAll("\\[\\d]","");
+                String name = actorDoc.select("h1 span").text().replace('\'','"').replaceAll("\\[\\d]","");
 
 //                BORN
-//                String born = actorDoc.select("tr:has(th:contains(Born)) td").text().replaceAll("'","\"").replaceAll("\\[\\d]","");
+                String born = actorDoc.select("tr:has(th:contains(Born)) td").text().replace('\'','"').replaceAll("\\[\\d]","");
 //
 ////                IMAGE_LINK
-//                String image_link = !actorDoc.select("td[class='infobox-image'] img").attr("src").isEmpty()?
-//                        actorDoc.select("td[class='infobox-image'] img").attr("src").substring(2) : "";
+                String image_link = !actorDoc.select("td[class='infobox-image'] img").attr("src").isEmpty()?
+                        actorDoc.select("td[class='infobox-image'] img").attr("src").substring(2) : "";
 //
 //
 ////                GENERAL_INFO
-////                START infobox biography vcard
-////                END H2
-//                ArrayList<String> general_info = new ArrayList<>();
-//                Element endOfGeneralInfo = !actorDoc.select("table[class='infobox biography vcard'] ~ h2 span:first-child").isEmpty()?
-//                        actorDoc.select("table[class='infobox biography vcard'] ~ h2 span:first-child").get(0):
-//                        new Element("undefined");
-//                String endOfGeneralInfoId = endOfGeneralInfo.attr("id");
-//
-//
-//                if(!endOfGeneralInfoId.isEmpty()){
-//                    Elements generalInfoParagraphs = actorDoc.select("table[class='infobox biography vcard']  ~ :not(h2:has(span[id='" + endOfGeneralInfoId +  "']),h2:has(span[id='" + endOfGeneralInfoId +  "']) ~ *) ");
-//
-////                    Elements firstTesting = actorDoc.select("h2:has(span[id='" + endOfGeneralInfoId +  "'])");
-////                    Element firstTesting = document.select("h2:has(span)").get(2);
-////                    System.out.println(generalInfoParagraphs.size() + "\t=\t" +  name + "\t:\t" +  "|" + endOfGeneralInfoId + "|");
-//                    for (Element element:
-//                            generalInfoParagraphs) {
-//                        general_info.add(element.text().replaceAll("'","\"").replaceAll("\\[\\d]",""));
-//                    }
-//                }
+//                START infobox biography vcard
+//                END H2
+                ArrayList<String> general_info = new ArrayList<>();
+                Element endOfGeneralInfo = !actorDoc.select("table[class='infobox biography vcard'] ~ h2 span:first-child").isEmpty()?
+                        actorDoc.select("table[class='infobox biography vcard'] ~ h2 span:first-child").get(0):
+                        new Element("undefined");
+                String endOfGeneralInfoId = endOfGeneralInfo.attr("id");
+
+
+                if(!endOfGeneralInfoId.isEmpty()){
+                    Elements generalInfoParagraphs = actorDoc.select("table[class='infobox biography vcard']  ~ :not(h2:has(span[id='" + endOfGeneralInfoId +  "']),h2:has(span[id='" + endOfGeneralInfoId +  "']) ~ *) ");
+
+//                    Elements firstTesting = actorDoc.select("h2:has(span[id='" + endOfGeneralInfoId +  "'])");
+//                    Element firstTesting = document.select("h2:has(span)").get(2);
+//                    System.out.println(generalInfoParagraphs.size() + "\t=\t" +  name + "\t:\t" +  "|" + endOfGeneralInfoId + "|");
+                    for (Element element:
+                            generalInfoParagraphs) {
+                        general_info.add(element.text().replace('\'','"').replaceAll("\\[\\d]",""));
+                    }
+                }
 
 //                System.out.println(general_info);
 
@@ -103,27 +105,27 @@ public class ActorSetup {
 //                https://www.google.com/search?q=paul+newman+filmography+wiki&client=opera
 //                https://www.google.com/search?q=leonardo+dicaprio+filmography+wiki&client=opera
 
-                String formattedName = String.join("+",Arrays.asList(name.split(" ")));
-                String actorFilmographySearchLink = "https://www.google.com/search?q=" + formattedName + "+filmography+wiki+en&client=opera";
-//                System.out.println(actorFilmographyLink);
+//                String formattedName = String.join("+",Arrays.asList(name.split(" ")));
+//                String actorFilmographySearchLink = "https://www.google.com/search?q=" + formattedName + "+filmography+wiki+en&client=opera";
+////                System.out.println(actorFilmographyLink);
+//
+//
+//                Document searchResults = Jsoup.connect(actorFilmographySearchLink)
+////                        .followRedirects(false)
+//                        .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64)" +
+//                                " AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36 " +
+//                                "OPR/102.0.0.0")
+//                        .timeout(0)
+//                        .header("Accept-Language","*")
+//                        .get();
+//
+//
+////                String actorFilmographyLink = Objects.requireNonNull(searchResults.select("div[class='MjjYud'] a").first()).attr("href");
+//                String actorFilmographyLink = searchResults.select("span[jscontroller='msmzHf'] a").first() != null ?
+//                        Objects.requireNonNull(searchResults.select("span[jscontroller='msmzHf'] a").first()).attr("href"):
+//                        "";
 
-
-                Document searchResults = Jsoup.connect(actorFilmographySearchLink)
-//                        .followRedirects(false)
-                        .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64)" +
-                                " AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36 " +
-                                "OPR/102.0.0.0")
-                        .timeout(0)
-                        .header("Accept-Language","*")
-                        .get();
-
-
-//                String actorFilmographyLink = Objects.requireNonNull(searchResults.select("div[class='MjjYud'] a").first()).attr("href");
-                String actorFilmographyLink = searchResults.select("span[jscontroller='msmzHf'] a").first() != null ?
-                        Objects.requireNonNull(searchResults.select("span[jscontroller='msmzHf'] a").first()).attr("href"):
-                        "";
-
-                System.out.println(searchResults.select("span") + "\t=\t" + name);
+//                System.out.println(searchResults.select("span") + "\t=\t" + name);
 
 
 //                if(count ==5) break;
@@ -133,8 +135,8 @@ public class ActorSetup {
 
 //                String name = row.select("td")
 
-//                Actor actor = new Actor(name,born, image_link, general_info, "");
-//                System.out.println(actor);
+                Actor actor = new Actor(name,born, image_link, general_info, "");
+                System.out.println(actor);
 
 //                actors.add(actor);
 
@@ -149,8 +151,10 @@ public class ActorSetup {
 
     }
 
-    static void scrapeFilmographies(){
+    public static void scrapeFilmographies(){
         try {
+//            ArrayList<Actor> actorsList = scrapeActors();
+//            System.out.println(actorsList);
 //            scra
 
 //                FILMOGRAPHY
@@ -158,37 +162,42 @@ public class ActorSetup {
 //                https://www.google.com/search?q=paul+newman+filmography+wiki&client=opera
 //                https://www.google.com/search?q=leonardo+dicaprio+filmography+wiki&client=opera
 
-            String formattedName = String.join("+",Arrays.asList(name.split(" ")));
-            String actorFilmographySearchLink = "https://www.google.com/search?q=" + formattedName + "+filmography+wiki+en&client=opera";
-//                System.out.println(actorFilmographyLink);
+//            String name = "a s d f";
+//            String formattedName = String.join("+",Arrays.asList(name.split(" ")));
+//            String actorFilmographySearchLink = "https://www.google.com/search?q=" + formattedName + "+filmography+wiki+en&client=opera";
+////                System.out.println(actorFilmographyLink);
+//
+//
+//            Document searchResults = Jsoup.connect(actorFilmographySearchLink)
+////                        .followRedirects(false)
+//                    .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64)" +
+//                            " AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36 " +
+//                            "OPR/102.0.0.0")
+//                    .timeout(0)
+//                    .header("Accept-Language","*")
+//                    .get();
+//
+//
+////                String actorFilmographyLink = Objects.requireNonNull(searchResults.select("div[class='MjjYud'] a").first()).attr("href");
+//            String actorFilmographyLink = searchResults.select("span[jscontroller='msmzHf'] a").first() != null ?
+//                    Objects.requireNonNull(searchResults.select("span[jscontroller='msmzHf'] a").first()).attr("href"):
+//                    "";
+//
+//            System.out.println(searchResults.select("span") + "\t=\t" + name);
 
 
-            Document searchResults = Jsoup.connect(actorFilmographySearchLink)
-//                        .followRedirects(false)
-                    .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64)" +
-                            " AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36 " +
-                            "OPR/102.0.0.0")
-                    .timeout(0)
-                    .header("Accept-Language","*")
-                    .get();
+        } finally {
 
-
-//                String actorFilmographyLink = Objects.requireNonNull(searchResults.select("div[class='MjjYud'] a").first()).attr("href");
-            String actorFilmographyLink = searchResults.select("span[jscontroller='msmzHf'] a").first() != null ?
-                    Objects.requireNonNull(searchResults.select("span[jscontroller='msmzHf'] a").first()).attr("href"):
-                    "";
-
-            System.out.println(searchResults.select("span") + "\t=\t" + name);
-
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
+//        catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
     }
-    static void fillActorTable(){
+
+    public static void fillActorTable(){
         ArrayList<Actor> actors = scrapeActors();
 
-        try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(sqlFilesDir + "fillActorTable.sql"))){
+        try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(sqlFilesDir + "fillActorTable.sql",true))){
 
             for (Actor actor: actors){
 
@@ -208,7 +217,7 @@ public class ActorSetup {
                                         """
                                 '%s'] , '%s')
                                 
-                                """, paragraph.replaceAll("'","\""), actor.getFilmography()
+                                """, paragraph.replace('\'','"'), actor.getFilmography()
                                 )
                         );
 
@@ -219,7 +228,7 @@ public class ActorSetup {
                                 String.format(
                                         """
                                 '%s',
-                                """, paragraph.replaceAll("'","\"")
+                                """, paragraph.replace('\'','"')
                                 )
                         );
 
@@ -236,7 +245,9 @@ public class ActorSetup {
     }
 
     public static void main(String[] args){
+//        fillActorTable();
 
+        scrapeActors();
 
 //        MyConnection myConnection = new MyConnection();
 //
@@ -247,6 +258,6 @@ public class ActorSetup {
 //        QueryResult queryResult = myConnection.query(createTableActor);
 //        System.out.println(queryResult);
 
-        scrapeActors();
+//        scrapeActors();
     }
 }

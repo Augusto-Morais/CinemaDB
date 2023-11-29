@@ -16,10 +16,13 @@ public class MyConnection {
     public void connect(){
         Connection conn = null;
         try {
+
+//            SELECT 'CREATE DATABASE mydb'
+//WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'mydb')
             connection = DriverManager.getConnection(url, user, password);
             System.out.println("Connected to the PostgreSQL server successfully.");
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.err.println(e.getMessage());
         }
 
     }

@@ -1,0 +1,91 @@
+
+
+//
+//            yearsLinksObj.forEach(yearLinkObj -> {
+//                JSONObject years = (JSONObject) yearLinkObj;
+//
+//                String decade = (String) years.get("Decade");
+//
+//                JSONArray links = (JSONArray) years.get("YearsLinks");
+//
+//
+//
+////                System.out.println(decade);
+//                fileWriter.write("[\n");
+//
+//
+//                links.forEach(link -> {
+//
+//                    try {
+//                        Document yearDoc = Jsoup.connect((String) link)
+//                                .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64)" +
+//                                        " AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36 " +
+//                                        "OPR/102.0.0.0")
+//                                .header("Accept-Language","*")
+//
+//
+//                                .get();
+////:contains(grossing films)
+//                        Element table = yearDoc.select("table:has(caption)").get(0);
+//                        Elements rows = table.select("tr");
+////                        if(rows.isEmpty()){
+////                            System.err.println(link + "\tERROR======================");
+////                            throw new Exception("Something went wrong");
+////                        }
+//                        rows.remove(0);
+//
+////                        System.out.println(rows);
+//                        System.out.println(link);
+//
+//
+//
+//                        rows.forEach(row -> {
+////                            System.out.println(row);
+//
+//                            String movieTitle = row.select("td").get(0).text();
+//                            System.out.print(movieTitle + ":\t");
+//
+//                            String movieLink = "https://en.wikipedia.org" +
+//                                    row.select("td").get(0).select("a").attr("href");
+//
+//                            System.out.println(movieLink);
+//                            JSONObject movieObj = new JSONObject();
+//
+//                            movieObj.put("MovieTitle",movieTitle);
+//                            movieObj.put("MovieLink", movieLink);
+//                            moviesLinks.add(movieObj);
+//
+//
+//                            try {
+//                                if(yearsLinksObj.get(yearsLinksObj.size() - 1) == yearLinkObj){
+//                                    fileWriter.write(movieObj.toJSONString());
+//                                }
+//                                else{
+//                                    fileWriter.write(movieObj.toJSONString() + ",\n");
+//                                }
+//                            } catch (IOException e) {
+//                                throw new RuntimeException(e);
+//                            }
+//
+//
+//
+//
+//                        });
+//
+//
+//
+//
+////                        fileWriter.write(moviesLinks.toJSONString());
+//
+//                        System.out.println();
+//
+////                        System.out.println(rows);
+//
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+//
+//                });
+////                System.out.println();
+//            });
+//            fileWriter.write("]");
