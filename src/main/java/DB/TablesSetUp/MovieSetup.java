@@ -18,15 +18,15 @@ public class MovieSetup {
     private static final String dir = System.getProperty("user.dir");
 
     private static int count = 0;
-    private static final String sqlFilesDir = dir + "\\src\\main\\java\\DB\\SQLFiles\\Movie\\";
-    private static  final String jsonFilesDir = dir + "\\src\\main\\java\\DB\\JSONFiles\\";
+    private static final String sqlFilesDir = dir + "\\src\\main\\SQLFiles\\Movie\\";
+    private static  final String jsonFilesDir = dir + "\\src\\main\\\\JSONFiles\\Movie\\";
 
 
     private static void scrapeYearsInFilmLinks(){
 
         ArrayList<String> yearsInFilmLinks = new ArrayList<>();
 
-        try (FileWriter fileWriter = new FileWriter(jsonFilesDir + "Movie\\yearsLinks.json")) {
+        try (FileWriter fileWriter = new FileWriter(jsonFilesDir + "yearsLinks.json")) {
 
             Document decadesDoc = Jsoup.connect("https://en.wikipedia.org/wiki/Lists_of_films")
                     .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64)" +
@@ -103,8 +103,8 @@ public class MovieSetup {
 
         JSONParser jsonParser = new JSONParser();
 
-        try(FileReader fileReader = new FileReader(jsonFilesDir + "Movie\\yearsLinks.json");
-                FileWriter fileWriter = new FileWriter(jsonFilesDir + "Movie\\moviesLinks.json",true)) {
+        try(FileReader fileReader = new FileReader(jsonFilesDir + "yearsLinks.json");
+                FileWriter fileWriter = new FileWriter(jsonFilesDir + "moviesLinks.json",true)) {
 
             Object obj = jsonParser.parse(fileReader);
 
@@ -194,7 +194,7 @@ public class MovieSetup {
     private static ArrayList<Movie> scrapeMovies() {
         ArrayList<Movie> moviesList = new ArrayList<>();
 
-        try (FileReader fileReader = new FileReader(jsonFilesDir + "Movie\\moviesLinks.json")) {
+        try (FileReader fileReader = new FileReader(jsonFilesDir + "moviesLinks.json")) {
 
             JSONParser jsonParser = new JSONParser();
 

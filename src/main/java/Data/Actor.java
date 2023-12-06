@@ -21,6 +21,8 @@ public class Actor {
         this.filmography = filmography;
     }
 
+    public Actor(){}
+
     public String getName() {
         return name;
     }

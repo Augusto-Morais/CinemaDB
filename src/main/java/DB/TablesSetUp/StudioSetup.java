@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class StudioSetup {
 
-    private static final String sqlFilesDir = System.getProperty("user.dir") + "\\src\\main\\java\\DB\\SQLFiles\\Studio\\";
+    private static final String sqlFilesDir = System.getProperty("user.dir") + "\\src\\main\\SQLFiles\\Studio\\";
     public static ArrayList<Studio> scrapeStudios(){
 
         ArrayList<Studio> studios = new ArrayList<>();

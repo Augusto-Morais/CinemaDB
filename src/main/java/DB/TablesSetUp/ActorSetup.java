@@ -20,7 +20,7 @@ public class ActorSetup {
     private static int count = 0;
 
 
-    private static final String sqlFilesDir = dir + "\\src\\main\\java\\DB\\SQLFiles\\Actor\\";
+    private static final String sqlFilesDir = dir + "\\src\\main\\SQLFiles\\Actor\\";
 
 
     public static ArrayList<Actor> scrapeActors(){
