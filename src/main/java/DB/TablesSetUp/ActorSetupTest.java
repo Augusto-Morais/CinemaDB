@@ -108,7 +108,11 @@ public class ActorSetupTest {
 
             JSONArray actorsObjects = (JSONArray) obj;
 
+            int words = 0;
+
             for (int i = 0; i < actorsObjects.size(); i++) {
+                if(i == 50) break;
+
                 count++;
                 Object actorObject = actorsObjects.get(i);
 
@@ -164,6 +168,8 @@ public class ActorSetupTest {
                     }
                 }
 
+                words += general_info.get(0).split(" ").length;
+
 //                String movieTitle = movie.get("original_title") != null? (String) movie.get("original_title") : (String) movie.get("name");
 //                String moviePoster = movie.get("poster_path") != null? (String) movie.get("poster_path") : null;
 //                String overview = movie.get("overview") != null? (String) movie.get("overview") : null;
@@ -187,6 +193,8 @@ public class ActorSetupTest {
 
                 System.out.println(actor);
             }
+
+            System.out.println((double) words / 50);
 
         } catch (IOException | ParseException e) {
             e.printStackTrace();
