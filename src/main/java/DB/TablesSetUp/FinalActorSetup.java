@@ -45,7 +45,7 @@ public class FinalActorSetup {
                     .url(String.format("https://api.themoviedb.org/3/search/person?query=%s&include_adult=false&language=en-US&page=1", formattedName))
                     .get()
                     .addHeader("accept", "application/json")
-                    .addHeader("Authorization", "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzY2EzYjBjYWIyNWQ4OGEyMTFmZjljYmEwODI0YTRlNSIsInN1YiI6IjY1NjEzZGRhMjQ0MTgyMDBlYmU0MTFhYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.0e0pBqAhlGkm_tYkecunAxRJPKzbgMHDd6D1C2_vb7Q")
+                    .addHeader("Authorization", "yourAPIKey")
                     .build();
 
             Response response;
@@ -111,7 +111,7 @@ public class FinalActorSetup {
                             .url(String.format(String.format("https://api.themoviedb.org/3/person/%s", actorID)))
                             .get()
                             .addHeader("accept", "application/json")
-                            .addHeader("Authorization", "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzY2EzYjBjYWIyNWQ4OGEyMTFmZjljYmEwODI0YTRlNSIsInN1YiI6IjY1NjEzZGRhMjQ0MTgyMDBlYmU0MTFhYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.0e0pBqAhlGkm_tYkecunAxRJPKzbgMHDd6D1C2_vb7Q")
+                            .addHeader("Authorization", "yourAPIKey")
                             .build();
 
 //                    234352 Margot Robbie
@@ -161,7 +161,7 @@ public class FinalActorSetup {
                     .url(String.format("https://api.themoviedb.org/3/person/%s/combined_credits?language=en-US", actorID))
                     .get()
                     .addHeader("accept", "application/json")
-                    .addHeader("Authorization", "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzY2EzYjBjYWIyNWQ4OGEyMTFmZjljYmEwODI0YTRlNSIsInN1YiI6IjY1NjEzZGRhMjQ0MTgyMDBlYmU0MTFhYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.0e0pBqAhlGkm_tYkecunAxRJPKzbgMHDd6D1C2_vb7Q")
+                    .addHeader("Authorization", "yourAPIKey")
                     .build();
 
             Response response = client.newCall(filmographyRequest).execute();
